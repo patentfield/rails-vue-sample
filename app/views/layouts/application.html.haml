@@ -1,0 +1,29 @@
+- body_attrs = "#{params[:controller]} #{params[:controller]}-#{params[:action]}"
+- body_attrs = content_for?(:body_attributes) ? yield(:body_attributes).gsub(/\"([^\"]+)\"/, "#{body_attrs} \\1") : "#{body_attrs}"
+- body_attrs = body_attrs.gsub('/','__').html_safe
+
+!!! 5
+%html
+  %head{prefix: "og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#"}
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "Rails/Vue.js Sample"
+
+    = stylesheet_link_tag 'application.css', media: 'all'
+    = yield(:stylesheets)
+
+    = csrf_meta_tags
+    -# = action_cable_meta_tag
+    = yield(:head)
+    = yield(:metas)
+
+    = javascript_bundle_tag "application"
+    = stylesheet_bundle_tag 'style'
+
+  %body{class: "#{body_attrs}"}
+    -# = render partial: 'layouts/global_header'
+    %main{:role => "main"}
+      = yield
+    -# = render partial: 'layouts/global_footer'
+
+    = yield(:javascripts)

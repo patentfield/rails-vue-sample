@@ -1,0 +1,6 @@
+- content_for :javascripts do
+  = javascript_bundle_tag "#{params[:controller].capitalize}#{params[:action].capitalize}"
+  = stylesheet_bundle_tag "#{params[:controller].capitalize}#{params[:action].capitalize}"
+
+#app
+  %pages-home
