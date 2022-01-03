@@ -40,4 +40,12 @@ import Vuex from "vuex";
 window.Vuex = Vuex;
 Vue.use(Vuex);
 
+import ActionCableVue from "actioncable-vue";
+Vue.use(ActionCableVue, {
+  debug: true,
+  debugLevel: "error",
+  connectionUrl: "ws://localhost:3000/cable",
+  connectImmediately: false,
+});
+
 window.Vue = Vue;

@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  config.action_cable.url = "ws://localhost:3000/cable"
+  config.action_cable.mount_path = '/cable/:client/:token'
 end

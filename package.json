@@ -5,6 +5,7 @@
     "lint": "eslint --fix 'frontend/**/*.{vue,css}'"
   },
   "dependencies": {
+    "actioncable-vue": "^2.5.1",
     "axios": "0.18.0",
     "core-js": "3",
     "history": "1.8.0",
