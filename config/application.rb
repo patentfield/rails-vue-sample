@@ -19,6 +19,8 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "../lib/tasks/assets_path_proxy"
+
 module RailsVueSample
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -34,5 +36,7 @@ module RailsVueSample
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.middleware.use AssetsPathProxy, ssl_verify_none: true
   end
 end
