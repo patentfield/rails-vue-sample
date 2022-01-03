@@ -21,6 +21,15 @@
     = stylesheet_bundle_tag 'style'
 
   %body{class: "#{body_attrs}"}
+    %div{style: "margin-top:20px;"}
+      = link_to 'Top', root_path
+      - if user_signed_in?
+        = link_to 'プロフィール変更', edit_user_registration_path
+        = link_to 'ログアウト', destroy_user_session_path, method: :delete
+      - else
+        = link_to 'サインアップ', new_user_registration_path
+        = link_to 'ログイン', new_user_session_path
+
     -# = render partial: 'layouts/global_header'
     %main{:role => "main"}
       = yield
