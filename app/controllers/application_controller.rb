@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   def set_cookie_user
     if user_signed_in?
-      cookies.signed[:user_id] = current_user.id
+      cookies.encrypted[:user_id] = current_user.id
     else
       cookies.delete(:user_id)
     end
