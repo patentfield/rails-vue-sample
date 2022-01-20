@@ -19,7 +19,6 @@
         v-row(no-gutters class="mt-2")
           v-col(cols="12")
             v-btn(color="info" @click="startBatch();") Railsでバッチ処理を開始する
-
         div(class="mt-3")
           router-link("to"="/") No page
           router-link("to"="/page1" class="ml-2") Page1

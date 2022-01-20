@@ -2,15 +2,21 @@
 #page2
   h2 page 2
   p This is page 2
+  .graph-wrapper
+    graph(:charttype="'piechart'")
 
 </template>
 
 <script>
+import Graph from "../components/Graph.vue";
 export default {
   data: function () {
     return {
       message1: "Hello Vue!",
     };
+  },
+  components: {
+   'graph': Graph
   },
 };
 </script>
