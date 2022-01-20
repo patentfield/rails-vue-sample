@@ -56,6 +56,12 @@ $ yarn run webpack-dev-server --color --mode development
 $ bundle exec rails s -b 0.0.0.0
 ```
 
+* ブラウザでアクセスを確認
+
+```
+open http://localhost:3000/
+```
+
 # 単体テスト(Javascript: jest)
 
 ```
