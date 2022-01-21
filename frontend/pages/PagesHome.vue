@@ -1,9 +1,9 @@
 <template lang="pug">
 #app
   #index
-    h1 Index page
     v-app
-      v-main
+      v-main(class="ps-3")
+        h1 Index page
         div
           img(src='../images/front.png' width="80px")
           p This is sample for Rails 6.1 Webpack 4 Vue.js 2.6 VueRouter Vuex Vuetify Jest
@@ -19,17 +19,28 @@
         v-row(no-gutters class="mt-2")
           v-col(cols="12")
             v-btn(color="info" @click="startBatch();") Railsでバッチ処理を開始する
+        v-row(no-gutters class="mt-2")
+          v-btn(color="error" @click="search();") 検索
         div(class="mt-3")
-          router-link("to"="/") No page
+          router-link("to"="/") 検索結果
           router-link("to"="/page1" class="ml-2") Page1
           router-link("to"="/page2" class="ml-2") Page2
+        div(class="mt-3 pl-3" v-if="$route.path !== '/'")
           router-view
+        div(class="mt-3 pl-3" v-else)
+          b ヒット件数:
+          span.ml-2 {{nHits}}
+          ul
+            li(v-for="record in records")
+              span {{record.applId}}
+              span.ml-2 {{record.patentTitle}}
+              span.ml-2 {{record.firstNamedApplicant.join(",")}}
 
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import PagesHomeStore from "../store/PagesHome.js";
+import SearchStore from '../store/SearchStore.js';
 import Page1 from "./PagesHomePage1.vue";
 import Page2 from "./PagesHomePage2.vue";
 
@@ -43,10 +54,9 @@ var router = new VueRouter({
 export default {
   vuetify: new Vuetify(),
   router: router,
-  store: PagesHomeStore,
+  store: SearchStore,
   data: function () {
     return {
-      message1: "Hello Vue!",
       channelStatus: null,
       channelMessage: null
     }
@@ -70,7 +80,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getItems: "getItems",
+      nHits: "nHits",
+      records: "records",
     }),
   },
   methods: {
@@ -114,14 +125,13 @@ export default {
           }
         }
       )
+    },
+    search () {
+      SearchStore.dispatch('search')
     }
   },
   mounted() {
     console.log("mounted vue");
-    this.$store.commit("addItem", "huga");
-    console.log(this.$store.getters.getItems);
-    console.log(this.getItems);
-    console.log(PagesHomeStore.getters.getItems);
     this.subscribeNotifications()
   },
 };
@@ -131,5 +141,10 @@ export default {
 p {
   font-size: 1.5em;
   text-align: center;
+}
+ul {
+  li {
+    font-size: 14px;
+  }
 }
 </style>
