@@ -1,3 +1,7 @@
+<style lang="scss" scoped>
+@import "./PagesHome.scss";
+</style>
+
 <template lang="pug">
 #app
   #index
@@ -136,15 +140,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-p {
-  font-size: 1.5em;
-  text-align: center;
-}
-ul {
-  li {
-    font-size: 14px;
-  }
-}
-</style>
