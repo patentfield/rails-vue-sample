@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     http.use_ssl = uri.scheme === "https"
     headers = { "Content-Type" => "application/json" }
 
-    q = "microsoft"
+    q = params[:q]
     ped_params = {
       "qf":"firstNamedApplicant",
       "searchText":"firstNamedApplicant:(#{q})",
