@@ -1,0 +1,8 @@
+{
+  "name": "rails-vue-sample",
+  "scripts": {
+    "postdeploy": "bundle exec rake db:migrate db:seed"
+  },
+  "cron": [
+  ]
+}
