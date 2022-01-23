@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const WebpackManifestPlugin = require('webpack-manifest-plugin')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 
 let entries = {}
 glob.sync('./frontend/@(pages|components)/**/*.js').map(function(file) {
@@ -39,7 +40,15 @@ module.exports = (env, argv) => {
       new WebpackManifestPlugin({
         writeToFileEmit: true
       }),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HardSourceWebpackPlugin({
+        environmentHash: {
+          root: process.cwd(),
+          directories: [],
+          files: ['babel.config.js', 'yarn.lock'],
+        },
+      })
+
     ],
     module: {
       rules: [
