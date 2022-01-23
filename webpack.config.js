@@ -46,7 +46,11 @@ module.exports = (env, argv) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
+          options: {
+            cacheCompression: false,
+            cacheDirectory: true,
+          },
         },
         {
           test: /\.vue$/,
