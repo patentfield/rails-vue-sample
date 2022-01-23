@@ -1,4 +1,7 @@
 {
+  "name": "rails-vue-sample",
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "build": "webpack --mode=production",
     "test": "jest --env=jsdom",
