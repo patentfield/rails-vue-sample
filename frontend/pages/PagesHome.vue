@@ -24,6 +24,9 @@
           v-col(cols="12")
             v-btn(color="info" @click="startBatch();") Railsでバッチ処理を開始する
         v-row(no-gutters class="mt-2")
+          v-col(cols="3")
+            v-text-field(label="文字を入力してください" outlined v-model="searchWord")
+        v-row(no-gutters class="mt-2")
           v-btn(color="error" @click="search();") 検索
         div(class="mt-3")
           router-link("to"="/") 検索結果
@@ -62,7 +65,8 @@ export default {
   data: function () {
     return {
       channelStatus: null,
-      channelMessage: null
+      channelMessage: null,
+      searchWord: ""
     }
   },
   channels: {
@@ -131,7 +135,7 @@ export default {
       )
     },
     search () {
-      SearchStore.dispatch('search')
+      SearchStore.dispatch('search', this.searchWord)
     }
   },
   mounted() {
