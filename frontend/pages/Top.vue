@@ -39,7 +39,7 @@ import { mapGetters } from "vuex";
 import SearchStore from '../store/SearchStore.js';
 import Page1 from "./PagesHomePage1.vue";
 import Page2 from "./PagesHomePage2.vue";
-import Notification from '../components/Notification.vue';
+import Notification from '../components/molecules/Notification.vue';
 
 var router = new VueRouter({
   routes: [

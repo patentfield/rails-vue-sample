@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Graph from "../components/Graph.vue";
+import Graph from "../components/atoms/Graph.vue";
 export default {
   data: function () {
     return {
