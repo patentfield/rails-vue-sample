@@ -19,6 +19,8 @@
 
     :javascript
       window.isSignedIn = #{raw user_signed_in?}
+      window.formAuthenticityToken = #{raw form_authenticity_token.to_json}
+      window.railsParams = #{raw params.to_json}
 
     = javascript_bundle_tag "application"
     = stylesheet_bundle_tag 'style'
