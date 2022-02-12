@@ -17,22 +17,21 @@
     = yield(:head)
     = yield(:metas)
 
+    :javascript
+      window.isSignedIn = #{raw user_signed_in?}
+
     = javascript_bundle_tag "application"
     = stylesheet_bundle_tag 'style'
 
   %body{class: "#{body_attrs}"}
-    %div{style: "margin-top:20px;"}
-      = link_to 'Top', root_path
-      - if user_signed_in?
-        = link_to 'プロフィール変更', edit_user_registration_path
-        = link_to 'ログアウト', destroy_user_session_path, method: :delete
-      - else
-        = link_to 'サインアップ', new_user_registration_path
-        = link_to 'ログイン', new_user_session_path
-
-    -# = render partial: 'layouts/global_header'
-    %main{:role => "main"}
+    #pages-header
+      %pages-header
+    %main#main{:role => "main", style: "margin-top:48px;min-height:100vh;"}
       = yield
-    -# = render partial: 'layouts/global_footer'
-
+    #pages-footer
+      %pages-footer
+    = javascript_bundle_tag "PagesHeader"
+    = stylesheet_bundle_tag "PagesHeader"
+    = javascript_bundle_tag "PagesFooter"
+    = stylesheet_bundle_tag "PagesFooter"
     = yield(:javascripts)
