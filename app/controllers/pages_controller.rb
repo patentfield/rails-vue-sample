@@ -10,8 +10,8 @@ class PagesController < ApplicationController
 
     q = params[:q]
     ped_params = {
-      "qf":"firstNamedApplicant",
-      "searchText":"firstNamedApplicant:(#{q})",
+      "fq":["firstNamedApplicant:\"#{q}\""],
+      "searchText":"*:*",
       "fl":"applId appFilingDate patentTitle firstNamedApplicant",
       "mm":"100%",
       "df":"patentTitle",
