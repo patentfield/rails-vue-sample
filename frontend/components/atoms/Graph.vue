@@ -11,6 +11,7 @@ p {
 </style>
 
 <script>
+import { mapGetters } from "vuex";
 import Plotly from 'plotly.js-dist';
 
 export default {
@@ -19,6 +20,11 @@ export default {
     return {
       message: "graph component",
     };
+  },
+  computed: {
+    ...mapGetters({
+      trace: "trace",
+    }),
   },
   mounted() {
     console.log("graph component mounted");
@@ -29,6 +35,9 @@ export default {
         break;
       case 'piechart':
         this.drawPieChart();
+        break;
+      case 'barchart2':
+        this.drawBarChart2();
         break;
       default:
     }
@@ -74,6 +83,18 @@ export default {
         height: 400,
         width: 500
       };
+
+      this.drawGraph("graph-area", data, layout, {});
+    },
+    drawBarChart2 () {
+      var trace = {
+        x: this.trace['x'],
+        y: this.trace['y'],
+        name: 'Search Word',
+        type: 'bar'
+      };
+      var data = [trace];
+      var layout = {title: '検索ワード別ヒット件数'};
 
       this.drawGraph("graph-area", data, layout, {});
     },
