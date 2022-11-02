@@ -6,18 +6,28 @@ export default new Vuex.Store({
     result: {},
   },
   getters: {
-    nHits: function (state) {
-      if (state.result && state.result.hasOwnProperty('numFound')) {
-        return state.result.numFound;
-      } else {
-        return 0;
-      }
-    },
-    records: function (state) {
-      if (state.result && state.result.hasOwnProperty('docs')) {
-        return state.result.docs;
+    responses: function (state) {
+      if (state.result && state.result.hasOwnProperty('responses')) {
+        return state.result.responses;
       } else {
         return [];
+      }
+    },
+    histories: function (state) {
+      if (state.result && state.result.hasOwnProperty('histories')) {
+        return state.result.histories;
+      } else {
+        return [];
+      }
+    },
+    trace: function (state) {
+      if (state.result && state.result.hasOwnProperty('trace')) {
+        return state.result.trace;
+      } else {
+        return {
+          'x': [],
+          'y': []
+        };
       }
     },
   },
@@ -36,6 +46,30 @@ export default new Vuex.Store({
       }
       context.commit('setStatus', "loading");
       axios.get('/search.json', {params: {q: query}}).then( function (response) {
+        context.commit('setResult', response.data);
+        context.commit('setStatus', "succeed");
+      }).catch( function (error) {
+        context.commit('setStatus', "error");
+      })
+    },
+    index: function (context) {
+      if (context.state.status === "loading") {
+        return;
+      }
+      context.commit('setStatus', "loading");
+      axios.get('/index.json').then( function (response) {
+        context.commit('setResult', response.data);
+        context.commit('setStatus', "succeed");
+      }).catch( function (error) {
+        context.commit('setStatus', "error");
+      })
+    },
+    destroy: function (context, query) {
+      if (context.state.status === "loading") {
+        return;
+      }
+      context.commit('setStatus', "loading");
+      axios.get('/destroy.json', {params: {q: query}}).then( function (response) {
         context.commit('setResult', response.data);
         context.commit('setStatus', "succeed");
       }).catch( function (error) {

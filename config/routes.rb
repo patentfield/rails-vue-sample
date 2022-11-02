@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'pages#home'
   get :search, to: 'pages#search'
+  get :index, to: 'pages#index'
+  get :destroy, to: 'pages#destroy'
 
   resources :jobs, only: [:index, :create]
   resources :notifications, only: [:index, :update, :create, :destroy] do
