@@ -17,6 +17,12 @@
       v-text-field(label="文字を入力してください" outlined v-model="searchWord")
     v-col(cols="9")
       span.ml-2 スペースORスペース区切りでOR検索が可能。検索結果シートの検索ワード選択肢で切り替え。Page3シートでグラフ表示。
+  v-row
+  v-row(no-gutters class="mt-2")
+    v-col(cols="3")
+      span.ml-2 出願日の絞り込み検索
+      v-text-field(label="mmmm-dd-yyyy" outlined v-model="startDate")
+      v-text-field(label="mmmm-dd-yyyy" outlined v-model="endDate")
   v-row(no-gutters class="mt-2")
     v-btn(color="error" @click="search();") 検索
   div(class="mt-3 pl-3" v-if="histories.length > 0")
@@ -76,6 +82,8 @@ export default {
     return {
       showNotification: false,
       searchWord: "",
+      startDate: "2022-01-01",
+      endDate: "2022-01-31",
       selected: 0,
       destroyId: 0
     }
