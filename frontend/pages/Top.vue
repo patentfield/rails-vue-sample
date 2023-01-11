@@ -37,6 +37,7 @@
     router-link("to"="/page1" class="ml-2") Page1
     router-link("to"="/page2" class="ml-2") Page2
     router-link("to"="/page3" class="ml-2") Page3
+    router-link("to"="/page4" class="ml-2") Page4
   div(class="mt-3 pl-3" v-if="$route.path !== '/'")
     router-view
   div(class="mt-3 pl-3" v-else)
@@ -62,6 +63,7 @@ import SearchStore from '../store/SearchStore.js';
 import Page1 from "./PagesHomePage1.vue";
 import Page2 from "./PagesHomePage2.vue";
 import Page3 from "./PagesHomePage3.vue";
+import Page4 from "./PagesHomePage4.vue";
 import Notification from '../components/molecules/Notification.vue';
 
 var router = new VueRouter({
@@ -69,6 +71,7 @@ var router = new VueRouter({
     { path: "/page1", component: Page1 },
     { path: "/page2", component: Page2 },
     { path: "/page3", component: Page3 },
+    { path: "/page4", component: Page4 },
   ],
 });
 
