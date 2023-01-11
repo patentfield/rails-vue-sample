@@ -11,11 +11,15 @@ class PagesController < ApplicationController
     responses = []
     x = []
     y = []
+    z = []
     search_word = params[:q]
+    start_date = params[:s]
+    end_date = params[:e]
     search_word.split(" OR ").each do |q|
       ped_params = {
-        "fq":["firstNamedApplicant:\"#{q}\""],
-        "searchText":"*:*",
+        "fq":["appFilingDate:[#{start_date}T00:00:00Z TO #{end_date}T23:59:59Z]",
+        "appStatus:\"Patented Case\""],
+        "searchText":"firstNamedApplicant:(#{q})",
         "fl":"applId appFilingDate patentTitle firstNamedApplicant",
         "mm":"100%",
         "df":"patentTitle",
@@ -27,6 +31,7 @@ class PagesController < ApplicationController
       responses.push(response)
       x.push(q)
       y.push(response["numFound"])
+      z.push(response["docs"][0]["appFilingDate"])
     end
     search_histories = []
     if user_signed_in?
@@ -38,7 +43,8 @@ class PagesController < ApplicationController
     end
     trace = {
       "x" => x,
-      "y" => y
+      "y" => y,
+      "z" => z
     }
     results = {
       "responses" => responses,

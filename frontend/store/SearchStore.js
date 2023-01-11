@@ -45,7 +45,11 @@ export default new Vuex.Store({
         return;
       }
       context.commit('setStatus', "loading");
-      axios.get('/search.json', {params: {q: query}}).then( function (response) {
+      axios.get('/search.json', {params: {
+          q: query.searchWord,
+          s: query.startDate,
+          e: query.endDate
+        }}).then( function (response) {
         context.commit('setResult', response.data);
         context.commit('setStatus', "succeed");
       }).catch( function (error) {

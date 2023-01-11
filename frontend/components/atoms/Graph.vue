@@ -39,6 +39,9 @@ export default {
       case 'barchart2':
         this.drawBarChart2();
         break;
+      case 'linechart':
+        this.drawLineChart();
+        break;
       default:
     }
   },
@@ -96,6 +99,17 @@ export default {
       var data = [trace];
       var layout = {title: '検索ワード別ヒット件数'};
 
+      this.drawGraph("graph-area", data, layout, {});
+    },
+    drawLineChart () {
+      var trace = {
+        x: this.trace['z'],
+        y: this.trace['y'],
+        type: 'scatter'
+      };
+
+      var data = [trace];
+      
       this.drawGraph("graph-area", data, layout, {});
     },
   },

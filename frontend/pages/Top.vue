@@ -17,6 +17,12 @@
       v-text-field(label="文字を入力してください" outlined v-model="searchWord")
     v-col(cols="9")
       span.ml-2 スペースORスペース区切りでOR検索が可能。検索結果シートの検索ワード選択肢で切り替え。Page3シートでグラフ表示。
+  v-row
+  v-row(no-gutters class="mt-2")
+    v-col(cols="3")
+      span.ml-2 出願日の絞り込み検索
+      v-text-field(label="mmmm-dd-yyyy" outlined v-model="startDate")
+      v-text-field(label="mmmm-dd-yyyy" outlined v-model="endDate")
   v-row(no-gutters class="mt-2")
     v-btn(color="error" @click="search();") 検索
   div(class="mt-3 pl-3" v-if="histories.length > 0")
@@ -31,6 +37,7 @@
     router-link("to"="/page1" class="ml-2") Page1
     router-link("to"="/page2" class="ml-2") Page2
     router-link("to"="/page3" class="ml-2") Page3
+    router-link("to"="/page4" class="ml-2") Page4
   div(class="mt-3 pl-3" v-if="$route.path !== '/'")
     router-view
   div(class="mt-3 pl-3" v-else)
@@ -56,6 +63,7 @@ import SearchStore from '../store/SearchStore.js';
 import Page1 from "./PagesHomePage1.vue";
 import Page2 from "./PagesHomePage2.vue";
 import Page3 from "./PagesHomePage3.vue";
+import Page4 from "./PagesHomePage4.vue";
 import Notification from '../components/molecules/Notification.vue';
 
 var router = new VueRouter({
@@ -63,6 +71,7 @@ var router = new VueRouter({
     { path: "/page1", component: Page1 },
     { path: "/page2", component: Page2 },
     { path: "/page3", component: Page3 },
+    { path: "/page4", component: Page4 },
   ],
 });
 
@@ -76,6 +85,8 @@ export default {
     return {
       showNotification: false,
       searchWord: "",
+      startDate: "2022-01-01",
+      endDate: "2022-01-31",
       selected: 0,
       destroyId: 0
     }
@@ -89,7 +100,11 @@ export default {
   },
   methods: {
     search () {
-      SearchStore.dispatch('search', this.searchWord)
+      SearchStore.dispatch('search', { 
+        searchWord: this.searchWord,
+        startDate: this.startDate,
+        endDate: this.endDate
+      })
     },
     index () {
       SearchStore.dispatch('index')
