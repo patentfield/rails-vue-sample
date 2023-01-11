@@ -97,7 +97,11 @@ export default {
   },
   methods: {
     search () {
-      SearchStore.dispatch('search', this.searchWord)
+      SearchStore.dispatch('search', { 
+        searchWord: this.searchWord,
+        startDate: this.startDate,
+        endDate: this.endDate
+      })
     },
     index () {
       SearchStore.dispatch('index')

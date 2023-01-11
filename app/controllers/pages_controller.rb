@@ -12,12 +12,12 @@ class PagesController < ApplicationController
     x = []
     y = []
     search_word = params[:q]
+    start_date = params[:s]
+    end_date = params[:e]
     search_word.split(" OR ").each do |q|
       ped_params = {
-        # "fq":["firstNamedApplicant:\"#{q}\""],
-        "fq":["appFilingDate:[2014-01-01T00:00:00Z TO 2014-12-31T23:59:59Z]",
+        "fq":["appFilingDate:[#{start_date}T00:00:00Z TO #{end_date}T23:59:59Z]",
         "appStatus:\"Patented Case\""],
-        # "searchText":"*:*",
         "searchText":"firstNamedApplicant:(#{q})",
         "fl":"applId appFilingDate patentTitle firstNamedApplicant",
         "mm":"100%",
