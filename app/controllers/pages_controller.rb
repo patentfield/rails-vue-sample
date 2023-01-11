@@ -11,6 +11,7 @@ class PagesController < ApplicationController
     responses = []
     x = []
     y = []
+    z = []
     search_word = params[:q]
     start_date = params[:s]
     end_date = params[:e]
@@ -30,6 +31,7 @@ class PagesController < ApplicationController
       responses.push(response)
       x.push(q)
       y.push(response["numFound"])
+      z.push(response["docs"][0]["appFilingDate"])
     end
     search_histories = []
     if user_signed_in?
@@ -41,7 +43,8 @@ class PagesController < ApplicationController
     end
     trace = {
       "x" => x,
-      "y" => y
+      "y" => y,
+      "z" => z
     }
     results = {
       "responses" => responses,
