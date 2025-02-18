@@ -12,14 +12,11 @@ require "action_mailbox/engine"
 require "action_text/engine"
 require "action_view/railtie"
 require "action_cable/engine"
-require "sprockets/railtie"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-require_relative "../lib/tasks/assets_path_proxy"
 
 module RailsVueSample
   class Application < Rails::Application
@@ -36,7 +33,5 @@ module RailsVueSample
 
     # Don't generate system test files.
     config.generators.system_tests = nil
-
-    config.middleware.use AssetsPathProxy, ssl_verify_none: true
   end
 end

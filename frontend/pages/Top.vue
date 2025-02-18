@@ -7,7 +7,7 @@
   h1 Index page
   div
     img(src='../images/front.png' width="80px")
-    p This is sample for Rails 6.1 Webpack 4 Vue.js 2.6 VueRouter Vuex Vuetify Jest
+    p This is sample for Rails 7.0 Webpack 4 Vue.js 2.6 VueRouter Vuex Vuetify Jest
     v-container Hello Vuetify world
   notification(v-if="showNotification")
   v-row(no-gutters class="mt-2")
